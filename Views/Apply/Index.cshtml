@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Recuriment_Platform.Models.Apply>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Job Applications</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Application</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Job Title</th>
+            <th>Candidate Name</th>
+            <th>Application Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var apply in Model)
+        {
+            <tr>
+                <td>@apply.Job?.jobTitle</td>
+                <td>@apply.Candidate?.Name</td>
+                <td>@apply.ApplicationDate.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Details" asp-route-jobId="@apply.JobId" asp-route-candidateId="@apply.CandidateId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-jobId="@apply.JobId" asp-route-candidateId="@apply.CandidateId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-jobId="@apply.JobId" asp-route-candidateId="@apply.CandidateId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
